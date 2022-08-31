@@ -1,27 +1,27 @@
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
+import Link from "next/link"
 
 const navigation = [
-    { name: 'Fahrschule', href: '#' },
-    { name: 'Führerschein', href: '#' },
-    { name: 'Aktuelles', href: '#' },
-    { name: 'Spezial', href: '#' },
+    { name: 'Führerscheine', href: '/fuehrerscheine' },
+    { name: 'Ablauf', href: '/ablauf' },
+    { name: 'Aktuelles', href: '/aktuelles' },
+    { name: 'Spezial', href: '/spezial' },
 ]
 
 export default function Navbar() {
     return (
-        <div className="relative bg-white overflow-hidden">
+        <div className="block md:relative bg-back-blue overflow-hidden">
             <div className="max-w-7xl mx-auto">
-                <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
+                <div className="block md:relative z-40 pb-8 bg-back-blue sm:pb-16 md:pb-2 lg:max-w-2xl lg:w-full lg:pb-2 xl:pb-2">
                     <svg
-                        className="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2"
+                        className="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-back-blue transform translate-x-1/2"
                         fill="currentColor"
                         viewBox="0 0 100 100"
                         preserveAspectRatio="none"
                         aria-hidden="true"
                     >
-                        <polygon points="50,0 100,0 50,100 0,100" />
                     </svg>
 
                     <Popover>
@@ -29,16 +29,16 @@ export default function Navbar() {
                             <nav className="relative flex items-center justify-between sm:h-10 lg:justify-start" aria-label="Global">
                                 <div className="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
                                     <div className="flex items-center justify-between w-full md:w-auto">
-                                        <a href="#">
+                                        <a href="/">
                                             <span className="sr-only">Workflow</span>
                                             <img
                                                 alt="Workflow"
                                                 className="h-8 w-auto sm:h-10"
-                                                src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
+                                                src="https://tailwindui.com/img/logos/workflow-mark.svg?color=red&shade=600"
                                             />
                                         </a>
                                         <div className="-mr-2 flex items-center md:hidden">
-                                            <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-500">
+                                            <Popover.Button className="bg-box-blue rounded-md p-2 inline-flex items-center justify-center text-red-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-500">
                                                 <span className="sr-only">Open main menu</span>
                                                 <MenuIcon className="h-6 w-6" aria-hidden="true" />
                                             </Popover.Button>
@@ -47,11 +47,11 @@ export default function Navbar() {
                                 </div>
                                 <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
                                     {navigation.map((item) => (
-                                        <a key={item.name} href={item.href} className="font-medium text-gray-500 hover:text-gray-900">
+                                        <a key={item.name} href={item.href} className="font-medium text-gray-300 hover:text-red-600">
                                             {item.name}
                                         </a>
                                     ))}
-                                    <a href="#" className="font-medium text-red-600 hover:text-red-400">
+                                    <a href="/kontakt" className="font-medium text-red-600 hover:text-red-400">
                                         Kontakt
                                     </a>
                                 </div>
@@ -71,17 +71,17 @@ export default function Navbar() {
                                 focus
                                 className="absolute z-10 top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
                             >
-                                <div className="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
+                                <div className="rounded-lg shadow-md bg-back-blue ring-1 ring-red-600 ring-opacity-5 overflow-hidden">
                                     <div className="px-5 pt-4 flex items-center justify-between">
                                         <div>
                                             <img
                                                 className="h-8 w-auto"
-                                                src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
+                                                src="https://tailwindui.com/img/logos/workflow-mark.svg?color=red&shade=600"
                                                 alt=""
                                             />
                                         </div>
                                         <div className="-mr-2">
-                                            <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                                            <Popover.Button className="bg-box-blue rounded-md p-2 inline-flex items-center justify-center text-red-600  focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-600">
                                                 <span className="sr-only">Close main menu</span>
                                                 <XIcon className="h-6 w-6" aria-hidden="true" />
                                             </Popover.Button>
@@ -92,7 +92,7 @@ export default function Navbar() {
                                             <a
                                                 key={item.name}
                                                 href={item.href}
-                                                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+                                                className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-red-600"
                                             >
                                                 {item.name}
                                             </a>
@@ -100,7 +100,7 @@ export default function Navbar() {
                                     </div>
                                     <a
                                         href="#"
-                                        className="block w-full px-5 py-3 text-center font-medium text-red-600 bg-gray-50 hover:bg-gray-100"
+                                        className="block w-full px-5 py-3 text-center font-medium text-red-600 bg-box-blue"
                                     >
                                         Kontakt
                                     </a>

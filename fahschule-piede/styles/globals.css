@@ -5,3 +5,8 @@ html,
 body{
     background-color: #dbeafe;
 }
+
+.svgfilter:hover {
+    filter: invert(70%) brightness(0.6) sepia(1) hue-rotate(-70deg) saturate(10);
+    transition: ease-in-out 250ms;
+}

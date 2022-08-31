@@ -1,20 +1,20 @@
-/* This example requires Tailwind CSS v2.0+ */
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 
+
 const navigation = [
-  { name: 'Fahrschule', href: '#' },
-  { name: 'Führerschein', href: '#' },
-  { name: 'Aktuelles', href: '#' },
-  { name: 'Spezial', href: '#' },
+  { name: 'Führerscheine', href: '/fuehrerscheine' },
+  { name: 'Ablauf', href: '/ablauf' },
+  { name: 'Aktuelles', href: '/aktuelles' },
+  { name: 'Spezial', href: '/spezial' },
 ]
 
 export default function Herosection() {
   return (
-    <div className="relative bg-blue-100 overflow-hidden">
+    <div className="block md:relative bg-back-blue overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="relative z-10 pb-8 bg-blue-100 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
+        <div className="block md:relative z-10 pb-8 bg-back-blue sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
           <svg
             className="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2"
             fill="currentColor"
@@ -22,7 +22,7 @@ export default function Herosection() {
             preserveAspectRatio="none"
             aria-hidden="true"
           >
-            <polygon points="50,0 100,0 50,100 0,100" />
+            <polygon points="50,0 100,0 50,100 0,100" className='text-back-blue'/>
           </svg>
 
           <Popover>
@@ -35,7 +35,7 @@ export default function Herosection() {
                       <img
                         alt="Workflow"
                         className="h-8 w-auto sm:h-10"
-                        src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
+                        src="https://tailwindui.com/img/logos/workflow-mark.svg?color=red&shade=600"
                       />
                     </a>
                     <div className="-mr-2 flex items-center md:hidden">
@@ -48,7 +48,7 @@ export default function Herosection() {
                 </div>
                 <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
                   {navigation.map((item) => (
-                    <a key={item.name} href={item.href} className="font-medium text-gray-500 hover:text-gray-900">
+                    <a key={item.name} href={item.href} className="font-medium text-gray-300 hover:text-red-600">
                       {item.name}
                     </a>
                   ))}
@@ -77,7 +77,7 @@ export default function Herosection() {
                     <div>
                       <img
                         className="h-8 w-auto"
-                        src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
+                        src="https://tailwindui.com/img/logos/workflow-mark.svg?color=red&shade=600"
                         alt=""
                       />
                     </div>
@@ -112,11 +112,11 @@ export default function Herosection() {
 
           <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
             <div className="sm:text-center lg:text-left">
-              <h1 className="text-4xl tracking-tight font-bold text-gray-900 sm:text-5xl sm:tracking-tight md:text-6xl md:tracking-tight">
+              <h1 className="text-4xl tracking-tight font-bold text-gray-300 sm:text-5xl sm:tracking-tight md:text-6xl md:tracking-tight">
                 <span className="block xl:inline">Fahrschule Piede</span>{' '}
                 <span className="block text-red-600 xl:inline">in Regen und Langdorf</span>
               </h1>
-              <p className="mt-3 text-base text-gray-800 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+              <p className="mt-3 text-base text-gray-300  sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
                 Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
                 fugiat veniam occaecat fugiat aliqua.
               </p>
@@ -126,7 +126,7 @@ export default function Herosection() {
                     href="#"
                     className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 md:py-4 md:text-lg md:px-10"
                   >
-                    Starte noch Heute
+                    Direkt zur Anmeldung
                   </a>
                 </div>
                 <div className="mt-3 sm:mt-0 sm:ml-3">
@@ -142,9 +142,9 @@ export default function Herosection() {
           </main>
         </div>
       </div>
-      <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+      <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 bg-slate-600">
         <img
-          className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
+          className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full mix-blend-overlay"
           src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
           alt=""
         />

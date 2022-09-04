@@ -12,9 +12,9 @@ const navigation = [
 
 export default function Navbar() {
     return (
-        <div className="block md:relative bg-back-blue overflow-hidden">
+        <div className="block md:block bg-back-blue overflow-hidden">
             <div className="max-w-7xl mx-auto">
-                <div className="block md:relative z-40 pb-8 bg-back-blue sm:pb-16 md:pb-2 lg:max-w-2xl lg:w-full lg:pb-2 xl:pb-2">
+                <div className="block md:block z-40 pb-8 bg-back-blue sm:pb-16 md:pb-2 lg:max-w-2xl lg:w-full lg:pb-2 xl:pb-2">
                     <svg
                         className="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-back-blue transform translate-x-1/2"
                         fill="currentColor"

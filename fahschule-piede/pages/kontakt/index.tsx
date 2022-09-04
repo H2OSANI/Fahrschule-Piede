@@ -1,123 +1,129 @@
+import Navbar from "../../components/Navbar"
+import Select from 'react-select'
+
+const vorbesitz = [
+  { value: 'AM', label: 'AM' },
+  { value: 'A1', label: 'A1' },
+  { value: 'A2', label: 'A2' },
+  { value: 'A', label: 'A' },
+  { value: 'Mofa', label: 'Mofa' },
+  { value: 'B', label: 'B' },
+  { value: 'BE', label: 'BE' },
+  { value: 'B96', label: 'B96' },
+  { value: 'C1', label: 'C1' },
+  { value: 'C1E', label: 'C1E' },
+  { value: 'C', label: 'C' },
+  { value: 'CE', label: 'CE' },
+  { value: 'L', label: 'L' },
+  { value: 'T', label: 'T' }
+]
+const anmeldung = [
+  { value: 'AM', label: 'AM' },
+  { value: 'A1', label: 'A1' },
+  { value: 'A2', label: 'A2' },
+  { value: 'A', label: 'A' },
+  { value: 'Mofa', label: 'Mofa' },
+  { value: 'B', label: 'B' },
+  { value: 'BE', label: 'BE' },
+  { value: 'B96', label: 'B96' },
+  { value: 'C1', label: 'C1' },
+  { value: 'C1E', label: 'C1E' },
+  { value: 'C', label: 'C' },
+  { value: 'CE', label: 'CE' },
+  { value: 'L', label: 'L' },
+  { value: 'T', label: 'T' }
+]
+
 
 function index() {
   return (
-    <main className="flex flex-col min-h-screen">
+    <>
+      <Navbar />
+      <main className="flex flex-col min-h-screen bg-box-blue border-t-2 border-red-600">
         <div className="min-h-screen flex flex-col align-center px-6 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-md">
-            <img className="mx-auto w-auto" src="/assets/test.jpg" alt="" />
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Anmeldung Führerschein</h2>
+            <h2 className="mt-6 text-center text-3xl font-extrabold text-white">Anmeldung Führerschein</h2>
           </div>
           <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-2xl">
             <div className="bg-white py-8 px-6 shadow rounded-lg sm:px-10">
-              <form className="mb-0 space-y-6"action="https://formsubmit.co/e8fb357925b57a2d52bccc728030d45b" method="POST">
-              <label htmlFor="anrede" className="block text-lg font-medium text-gray-700" >Anrede</label>
-                  <div className="mt-1">
-                    <select name="_subject" id="anrede" className="">
-                      <option value="">Bitte auswählen</option>
-                      <option value="Führerschein">Herr</option>
-                      <option value="Führerschein">Frau</option>
-                      
-                    </select>
-                  </div>
-                  <div>
+              <form className="mb-0 space-y-6" action="https://formsubmit.co/e8fb357925b57a2d52bccc728030d45b" method="POST">
+                <label htmlFor="anrede" className="block text-lg font-medium text-gray-700" >Anrede</label>
+                <div className="mt-1">
+                  <select name="_subject" id="anrede" className="">
+                    <option value="">Bitte auswählen</option>
+                    <option value="Führerschein">Herr</option>
+                    <option value="Führerschein">Frau</option>
+
+                  </select>
+                </div>
+                <div>
                   <label htmlFor="Vorname" className="block text-lg font-medium text-gray-700">Vorname</label>
                   <div className="mt-1">
-                    <input id="Name" name="Name" type="text" autoComplete="Name" required className=""/>
+                    <input id="Name" name="Name" type="text" autoComplete="Name" required className="" />
                   </div>
                 </div>
                 <div>
                   <label htmlFor="Name" className="block text-lg font-medium text-gray-700">Name</label>
                   <div className="mt-1">
-                    <input id="Name" name="Name" type="text" autoComplete="Surname" required className=""/>
+                    <input id="Name" name="Name" type="text" autoComplete="Surname" required className="" />
                   </div>
                 </div>
                 <div>
                   <label htmlFor="Geburtsdatum" className="block text-lg font-medium text-gray-700">Geburtsdatum</label>
                   <div className="mt-1">
-                    <input id="Geburtsdatum" name="Name" type="date" autoComplete="date" required className=""/>
+                    <input id="Geburtsdatum" name="Name" type="date" autoComplete="date" required className="" />
                   </div>
                 </div>
                 <div>
                   <label htmlFor="Geburtsort" className="block text-lg font-medium text-gray-700">Geburtsort</label>
                   <div className="mt-1">
-                    <input id="Geburtsort" name="Geburtsort" type="text" autoComplete="" required className=""/>
+                    <input id="Geburtsort" name="Geburtsort" type="text" autoComplete="" required className="" />
                   </div>
                 </div>
                 <div>
                   <label htmlFor="Name" className="block text-lg font-medium text-gray-700">Straße, Hausnummer</label>
                   <div className="mt-1">
-                    <input id="Name" name="Name" type="text" autoComplete="Surname" required className=""/>
+                    <input id="Name" name="Name" type="text" autoComplete="Surname" required className="" />
                   </div>
                 </div>
                 <div>
                   <label htmlFor="Name" className="block text-lg font-medium text-gray-700">PLZ</label>
                   <div className="mt-1">
-                    <input id="Name" name="Name" type="text" autoComplete="Surname" required className=""/>
+                    <input id="Name" name="Name" type="text" autoComplete="Surname" required className="" />
                   </div>
                 </div>
                 <div>
                   <label htmlFor="Name" className="block text-lg font-medium text-gray-700">Ort</label>
                   <div className="mt-1">
-                    <input id="Name" name="Name" type="text" autoComplete="Surname" required className=""/>
+                    <input id="Name" name="Name" type="text" autoComplete="Surname" required className="" />
                   </div>
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-lg font-medium text-gray-700">Email Adresse</label>
                   <div className="mt-1">
-                    <input id="email" name="email" type="email" autoComplete="email" required className=""/>
+                    <input id="email" name="email" type="email" autoComplete="email" required className="" />
                   </div>
                 </div>
                 <div>
                   <label htmlFor="phone" className="block text-lg font-medium text-gray-700">Mobil</label>
                   <div className="mt-1">
-                    <input id="mobil" name="mobil" type="text" autoComplete="mobile" required className=""/>
+                    <input id="mobil" name="mobil" type="text" autoComplete="mobile" required className="" />
                   </div>
                 </div>
                 <div>
                   <label htmlFor="Topic" className="block text-lg font-medium text-gray-700" >Führerscheinklasse</label>
                   <div className="mt-1">
-                    <select name="_subject" id="topic" className="">
-                      <option value="">Bitte auswählen</option>
-                      <option value="AM">AM</option>
-                      <option value="A1">A1</option>
-                      <option value="A2">A2</option>
-                      <option value="A">A</option>
-                      <option value="B196">B196</option>
-                      <option value="Mofa">Mofa</option>
-                      <option value="B">B</option>
-                      <option value="BE">BE</option>
-                      <option value="B96">B96</option>
-                      <option value="C1">C1</option>
-                      <option value="C1E">C1E</option>
-                      <option value="C">C</option>
-                      <option value="CE">CE</option>
-                      <option value="L">L</option>
-                      <option value="T">T</option>
-                    </select>
+                    <Select isMulti className="basic-multi-select"
+                      classNamePrefix="select" options={anmeldung} name="_subject" id="topic"/>
 
                     <label htmlFor="Vorbesitz" className="block text-lg font-medium text-gray-700" >Führerschein Vorbesitz</label>
-                    <select name="" id="Vorbesitz" className="">
-                      <option value="">Bitte auswählen</option>
-                      <option value="AM">AM</option>
-                      <option value="A1">A1</option>
-                      <option value="A2">A2</option>
-                      <option value="A">A</option>
-                      <option value="Mofa">Mofa</option>
-                      <option value="B">B</option>
-                      <option value="BE">BE</option>
-                      <option value="B96">B96</option>
-                      <option value="C1">C1</option>
-                      <option value="C1E">C1E</option>
-                      <option value="C">C</option>
-                      <option value="CE">CE</option>
-                      <option value="L">L</option>
-                      <option value="T">T</option>
-                    </select>
+                    <Select isMulti className="basic-multi-select"
+                      classNamePrefix="select" options={vorbesitz} name="_Vorbesitz" id="vorbesitz"/>
                   </div>
                   <div>
                     <label htmlFor="body" className="block text-lg font-medium text-gray-700 mt-4">Nachricht</label>
                     <div className="mt-1">
-                      <textarea id="body" name="body" rows={10} cols={20} required className="" placeholder="Maximal 500 Wörter!" maxLength={500}/>
+                      <textarea id="body" name="body" rows={10} cols={20} required className="" placeholder="Maximal 500 Wörter!" maxLength={500} />
                     </div>
                   </div>
                 </div>
@@ -130,6 +136,7 @@ function index() {
           </div>
         </div>
       </main>
+    </>
   )
 }
 

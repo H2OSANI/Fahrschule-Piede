@@ -1,10 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-html,
-body{
-    background-color: #dbeafe;
-}
+@layer base {
+    [type="text"],
+    [type="email"],
+    [type="url"],
+    [type="password"],
+    [type="number"],
+    [type="date"],
+    [type="datetime-local"],
+    [type="month"],
+    [type="search"],
+    [type="tel"],
+    [type="time"],
+    [type="week"],
+    [multiple],
+    textarea,
+    select {
+      @apply w-full border-gray-300 rounded-lg shadow-sm focus:border-indigo-500 focus:ring-indigo-500;
+    }
+    [type="checkbox"],
+    [type="radio"] {
+      @apply border-gray-300 rounded text-indigo-600 focus:ring-indigo-500;
+    }
+  }
 
 .svgfilter:hover {
     filter: invert(70%) brightness(0.6) sepia(1) hue-rotate(-70deg) saturate(10);

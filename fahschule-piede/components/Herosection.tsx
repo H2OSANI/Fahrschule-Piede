@@ -23,7 +23,7 @@ export default function Herosection() {
             preserveAspectRatio="none"
             aria-hidden="true"
           >
-            <polygon points="50,0 100,0 50,100 0,100" className='text-back-blue'/>
+            <polygon points="50,0 100,0 50,100 0,100" className='text-back-blue' />
           </svg>
 
           <Popover>
@@ -34,7 +34,7 @@ export default function Herosection() {
                     <Link href="/">
                       <img
                         alt="Workflow"
-                        className="h-8 w-auto sm:h-10"
+                        className="h-8 w-auto sm:h-10 cursor-pointer"
                         src="https://tailwindui.com/img/logos/workflow-mark.svg?color=red&shade=600"
                       />
                     </Link>
@@ -49,7 +49,7 @@ export default function Herosection() {
                 <div className="hidden md:flex md:ml-10 md:pr-4 md:space-x-8 ">
                   {navigation.map((item) => (
                     <Link key={item.name} href={item.href}>
-                      <h3  className="font-medium text-gray-300 hover:text-red-600 cursor-pointer">{item.name}</h3>
+                      <h3 className="font-medium text-gray-300 hover:text-red-600 cursor-pointer">{item.name}</h3>
                     </Link>
                   ))}
                   <Link href="/kontakt" >
@@ -120,20 +120,22 @@ export default function Herosection() {
               </p>
               <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                 <div className="rounded-md shadow">
-                  <a
-                    href="#"
-                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 md:py-4 md:text-lg md:px-10"
+                  <Link
+                    href="/kontakt"
                   >
-                    Direkt zur Anmeldung
-                  </a>
+                    <h2 className="cursor-pointer w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 md:py-4 md:text-lg md:px-10">
+                      Direkt zur Anmeldung
+                    </h2>
+                  </Link>
                 </div>
                 <div className="mt-3 sm:mt-0 sm:ml-3">
-                  <a
-                    href="#"
-                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 md:py-4 md:text-lg md:px-10"
+                  <Link
+                    href="/ablauf"
                   >
-                    Erfahre Mehr
-                  </a>
+                    <h2 className="cursor-pointer w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 md:py-4 md:text-lg md:px-10">
+                      Erfahre Mehr
+                    </h2>
+                  </Link>
                 </div>
               </div>
             </div>

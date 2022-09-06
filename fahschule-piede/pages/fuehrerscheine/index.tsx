@@ -12,7 +12,7 @@ function index() {
         <h1 className="text-gray-100 font-bold text-4xl">Führerscheinklassen</h1>
       </div>
     <Klassen />
-      <div id="Ausbildungsstunden" className="hidden  flex-row justify-around items-center">
+      <div id="Ausbildungsstunden" className="hidden flex-row justify-around items-center">
         <div id="Praktisch" className="flex flex-col justify-center items-center">
           <h2>Praktische Ausbildung</h2>
           <img src="/assets/test.jpg" alt="" />

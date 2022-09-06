@@ -125,13 +125,13 @@ function Form() {
                 <div className="">
                     <label htmlFor="Klasse" className="block text-lg font-medium text-gray-100" >Führerscheinklasse Anmeldung</label>
                     <Select isMulti className="basic-multi-select"
-                        classNamePrefix="select" options={anmeldung} name="Klasse" id="Klasse" />
+                        classNamePrefix="select" options={anmeldung} name="Klasse" aria-label='Multiselect Dropdown'/>
 
                 </div>
                 <div>
                     <label htmlFor="Vorbesitz" className="block text-lg font-medium text-gray-100" >Führerschein Vorbesitz</label>
                     <Select isMulti className="basic-multi-select"
-                        classNamePrefix="select" options={vorbesitz} name="Vorbesitz" id="Vorbesitz" />
+                        classNamePrefix="select" options={vorbesitz} name="Vorbesitz" aria-label='Multiselect Dropdown'/>
                 </div>
             </div>
             <div>

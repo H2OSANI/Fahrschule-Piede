@@ -7,7 +7,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Herosection />
-      <div className='w-full min-h-screen bg-back-blue'>
+      <div className='w-full min-h-screen pb-8 bg-back-blue'>
         <h2 className='pt-8 pb-8 text-red-600 text-4xl font-bold text-center'>Fahrschule in Regen</h2>
         <div className="flex justify-center items-center flex-col w-full">
           

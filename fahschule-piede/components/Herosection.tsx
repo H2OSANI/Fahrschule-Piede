@@ -1,12 +1,13 @@
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
+import Link from 'next/link'
 
 
 const navigation = [
+  { name: 'Start', href: '/' },
   { name: 'Führerscheine', href: '/fuehrerscheine' },
   { name: 'Ablauf', href: '/ablauf' },
-  { name: 'Aktuelles', href: '/aktuelles' },
   { name: 'Spezial', href: '/spezial' },
 ]
 
@@ -30,31 +31,30 @@ export default function Herosection() {
               <nav className="relative flex items-center justify-between sm:h-10 lg:justify-start" aria-label="Global">
                 <div className="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
                   <div className="flex items-center justify-between w-full md:w-auto">
-                    <a href="#">
-                      <span className="sr-only">Workflow</span>
+                    <Link href="/">
                       <img
                         alt="Workflow"
                         className="h-8 w-auto sm:h-10"
                         src="https://tailwindui.com/img/logos/workflow-mark.svg?color=red&shade=600"
                       />
-                    </a>
+                    </Link>
                     <div className="-mr-2 flex items-center md:hidden">
-                      <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-500">
+                      <Popover.Button className="bg-box-blue rounded-md p-2 inline-flex items-center justify-center text-red-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-500">
                         <span className="sr-only">Open main menu</span>
                         <MenuIcon className="h-6 w-6" aria-hidden="true" />
                       </Popover.Button>
                     </div>
                   </div>
                 </div>
-                <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
+                <div className="hidden md:flex md:ml-10 md:pr-4 md:space-x-8 ">
                   {navigation.map((item) => (
-                    <a key={item.name} href={item.href} className="font-medium text-gray-300 hover:text-red-600">
-                      {item.name}
-                    </a>
+                    <Link key={item.name} href={item.href}>
+                      <h3  className="font-medium text-gray-300 hover:text-red-600 cursor-pointer">{item.name}</h3>
+                    </Link>
                   ))}
-                  <a href="#" className="font-medium text-red-600 hover:text-red-400">
-                    Kontakt
-                  </a>
+                  <Link href="/kontakt" >
+                    <h3 className="font-medium text-red-600 hover:text-red-400 cursor-pointer">Kontakt</h3>
+                  </Link>
                 </div>
               </nav>
             </div>
@@ -72,7 +72,7 @@ export default function Herosection() {
                 focus
                 className="absolute z-10 top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
               >
-                <div className="rounded-lg shadow-md bg-blue-100 ring-1 ring-black ring-opacity-5 overflow-hidden">
+                <div className="rounded-lg shadow-md bg-back-blue ring-1 ring-black ring-opacity-5 overflow-hidden">
                   <div className="px-5 pt-4 flex items-center justify-between">
                     <div>
                       <img
@@ -82,7 +82,7 @@ export default function Herosection() {
                       />
                     </div>
                     <div className="-mr-2">
-                      <Popover.Button className="bg-blue-100 rounded-md p-2 inline-flex items-center justify-center text-gray-800 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                      <Popover.Button className="bg-box-blue rounded-md p-2 inline-flex items-center justify-center text-red-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-500">
                         <span className="sr-only">Close main menu</span>
                         <XIcon className="h-6 w-6" aria-hidden="true" />
                       </Popover.Button>
@@ -90,21 +90,19 @@ export default function Herosection() {
                   </div>
                   <div className="px-2 pt-2 pb-3 space-y-1">
                     {navigation.map((item) => (
-                      <a
+                      <Link
                         key={item.name}
                         href={item.href}
-                        className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
                       >
-                        {item.name}
-                      </a>
+                        <h3 className="block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-red-900">{item.name}</h3>
+                      </Link>
                     ))}
                   </div>
-                  <a
-                    href="#"
-                    className="block w-full px-5 py-3 text-center font-medium text-red-600 bg-gray-50 hover:bg-gray-100"
+                  <Link
+                    href="/kontakt"
                   >
-                    Kontakt
-                  </a>
+                    <h3 className="block w-full px-5 py-3 text-center font-medium text-red-600 bg-box-blue border-t border-red-600">Kontakt</h3>
+                  </Link>
                 </div>
               </Popover.Panel>
             </Transition>

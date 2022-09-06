@@ -69,7 +69,7 @@ function Klassen() {
                                 leaveTo="opacity-0 scale-95"
                             >
                                 <Dialog.Panel className="w-full max-w-2xl min-h-auto transform overflow-hidden rounded-2xl p-4 bg-box-blue text-center align-middle shadow-xl transition-all">
-                                    <div className='text-white text-end text-3xl cursor-pointer' onClick={closeModal}>{"×"}</div>
+                                    <div className='text-white text-end text-3xl cursor-pointer hover:text-red-600' onClick={closeModal}>{"×"}</div>
                                     <Image src="/assets/PKW.svg" width="180px" height="80px" className="cursor-pointer" />
                                     <Dialog.Title
                                         as="h2"
@@ -116,7 +116,7 @@ function Klassen() {
                                         )}
                                     </Disclosure>
                                     <div className="mt-4">
-                                        <Link href="/">
+                                        <Link href="/kontakt">
                                             <button
                                                 type="button"
                                                 className="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"

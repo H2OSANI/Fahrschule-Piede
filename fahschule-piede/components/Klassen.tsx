@@ -20,26 +20,26 @@ function Klassen() {
 
     return (
         <>
-            <div id="Klassenauswahl" className="w-full h-44 flex flex-row items-center justify-evenly bg-back-blue">
+            <div id="Klassenauswahl" className="w-full h-auto py-8 gap-12 flex flex-col md:flex-row items-center justify-evenly bg-back-blue">
                 <div className="svgfilter flex flex-col justify-center" onClick={() => openModal()}>
                     <Image src="/assets/PKW.svg" width="48px" height="30px" className="cursor-pointer" />
-                    <h2 className="text-gray-300 text-lg font-bold text-center mt-2">PKW</h2>
+                    <h2 className="text-gray-300 text-lg font-bold text-center mt-2 cursor-pointer">PKW {"→"}</h2>
                 </div>
                 <div className="svgfilter flex flex-col justify-center" onClick={() => openModal()}>
                     <Image src="/assets/Motorrad.svg" width="48px" height="30px" className="cursor-pointer" />
-                    <h2 className="text-gray-300 text-lg font-bold text-center mt-2">Zweirad</h2>
+                    <h2 className="text-gray-300 text-lg font-bold text-center mt-2 cursor-pointer">Zweirad {"→"}</h2>
                 </div>
                 <div className="svgfilter flex flex-col justify-center" onClick={() => openModal()}>
                     <Image src="/assets/Anhänger.svg" width="48px" height="30px" className="cursor-pointer" />
-                    <h2 className="text-gray-300 text-lg font-bold text-center mt-2">Anhänger</h2>
+                    <h2 className="text-gray-300 text-lg font-bold text-center mt-2 cursor-pointer">Anhänger {"→"}</h2>
                 </div>
                 <div className="svgfilter flex flex-col justify-center" onClick={() => openModal()}>
                     <Image src="/assets/LKW.svg" width="48px" height="30px" className="cursor-pointer" />
-                    <h2 className="text-gray-300 text-lg font-bold text-center mt-2">LKW</h2>
+                    <h2 className="text-gray-300 text-lg font-bold text-center mt-2 cursor-pointer">LKW {"→"}</h2>
                 </div>
                 <div className="svgfilter flex flex-col justify-center" onClick={() => openModal()}>
                     <Image src="/assets/Traktor.svg" width="48px" height="30px" className="cursor-pointer" />
-                    <h2 className="text-gray-300 text-lg font-bold text-center mt-2">Traktor</h2>
+                    <h2 className="text-gray-300 text-lg font-bold text-center mt-2 cursor-pointer">Traktor {"→"}</h2>
                 </div>
             </div>
 

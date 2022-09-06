@@ -8,7 +8,7 @@ function index() {
     <>
     <Navbar />
     <main>
-      <div id="Banner" className="flex w-full h-80 bg-box-blue items-center justify-center border-b border-red-600 ">
+      <div id="Banner" className="flex w-full h-80 bg-box-blue items-center justify-center border-b border-t border-red-600 ">
         <h1 className="text-gray-100 font-bold text-4xl">Führerscheinklassen</h1>
       </div>
     <Klassen />

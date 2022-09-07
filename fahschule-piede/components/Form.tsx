@@ -40,7 +40,7 @@ function Form() {
 
     const sendEmail = (e: any) => {
         e.preventDefault();
-        emailjs.sendForm(process.env.SERVICE_ID!, process.env.TEMPLATE_ID!, form.current!, process.env.PUBLIC_KEY!)
+        emailjs.sendForm(`service_3wlzs5c`, `template_o20v3qf`, form.current!, `iEU-IFKLoxl79jqsm`)
             .then((result) => {
                 console.log(result.text);
                 toast.success('Anmeldung versendet!')

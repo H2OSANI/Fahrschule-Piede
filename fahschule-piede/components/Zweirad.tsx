@@ -188,6 +188,7 @@ function Zweirad() {
                         <ul className='list-disc ml-5'>
                             <li>Hubraum mehr als 50cm³</li>
                             <li>bauartbedingter Höchstgeschwindigkeit von mehr als 45 km/h,</li>
+                            <li>Keine Beschränkung im Leistungsgewicht</li>
                         </ul>
                         <p className="my-1 italic">auch mit Beiwagen</p>
                         <h3 className='my-3'>Alter: <span className='font-bold'>ab 20 wenn Vorbesitz von A2 2 Jahre gegeben ist</span></h3>

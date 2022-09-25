@@ -1,6 +1,7 @@
+
 import Navbar from "../components/Navbar"
 
-function ablauf() {
+function öffnungszeiten() {
     return (
         <>
             <Navbar />
@@ -9,4 +10,4 @@ function ablauf() {
     )
 }
 
-export default ablauf
+export default öffnungszeiten

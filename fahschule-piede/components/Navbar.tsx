@@ -6,8 +6,7 @@ import Link from "next/link"
 const navigation = [
     { name: 'Start', href: '/' },
     { name: 'Führerscheine', href: '/fuehrerscheine' },
-    { name: 'Ablauf', href: '/ablauf' },
-    { name: 'Spezial', href: '/spezial' },
+    { name: 'Öffnungszeiten', href: '/oeffnungszeiten' },
 ]
 
 export default function Navbar() {

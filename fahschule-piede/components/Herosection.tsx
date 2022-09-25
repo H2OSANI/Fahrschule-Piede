@@ -7,8 +7,7 @@ import Link from 'next/link'
 const navigation = [
   { name: 'Start', href: '/' },
   { name: 'Führerscheine', href: '/fuehrerscheine' },
-  { name: 'Ablauf', href: '/ablauf' },
-  { name: 'Spezial', href: '/spezial' },
+  { name: 'Öffnungszeiten', href: '/oeffnungszeiten' },
 ]
 
 export default function Herosection() {
@@ -115,8 +114,7 @@ export default function Herosection() {
                 <span className="block text-red-600 xl:inline">in Regen und Langdorf</span>
               </h1>
               <p className="mt-3 text-base text-gray-300  sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
-                fugiat veniam occaecat fugiat aliqua.
+                Wir bringen dich auf deinen Weg in die mobile Zukunft
               </p>
               <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                 <div className="rounded-md shadow">
@@ -130,7 +128,7 @@ export default function Herosection() {
                 </div>
                 <div className="mt-3 sm:mt-0 sm:ml-3">
                   <Link
-                    href="/ablauf"
+                    href="#desc"
                   >
                     <h2 className="cursor-pointer w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 md:py-4 md:text-lg md:px-10">
                       Erfahre Mehr

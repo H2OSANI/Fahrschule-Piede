@@ -1,4 +1,3 @@
-
 import { Dialog, Disclosure, Transition } from "@headlessui/react"
 import Image from "next/image"
 import { ChevronUpIcon } from "@heroicons/react/outline"

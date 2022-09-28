@@ -11,18 +11,9 @@ const navigation = [
 
 export default function Navbar() {
     return (
-        <div className="block md:block bg-back-blue overflow-hidden">
+        <header className="md:block bg-back-blue overflow-hidden">
             <div className="max-w-7xl mx-auto">
                 <div className="block md:block z-40 pb-8 bg-back-blue sm:pb-16 md:pb-2 lg:max-w-2xl lg:w-full lg:pb-2 xl:pb-2">
-                    <svg
-                        className="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-back-blue transform translate-x-1/2"
-                        fill="currentColor"
-                        viewBox="0 0 100 100"
-                        preserveAspectRatio="none"
-                        aria-hidden="true"
-                    >
-                    </svg>
-
                     <Popover>
                         <div className="relative pt-6 px-4 sm:px-6 lg:px-8">
                             <nav className="relative flex items-center justify-between sm:h-10 lg:justify-start" aria-label="Global">
@@ -91,14 +82,14 @@ export default function Navbar() {
                                                 key={item.name}
                                                 href={item.href}
                                             >
-                                                <h3  className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-red-600">{item.name}</h3>
+                                                <h3  className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-red-600 cursor-pointer">{item.name}</h3>
                                             </Link>
                                         ))}
                                     </div>
                                     <Link
                                         href="/kontakt"
                                     >
-                                        <h3 className="block w-full px-5 py-3 text-center font-medium text-red-600 bg-box-blue">Kontakt</h3>
+                                        <h3 className="block w-full px-5 py-3 text-center font-medium text-red-600 border-t border-red-600 bg-box-blue cursor-pointer">Kontakt</h3>
                                     </Link>
                                 </div>
                             </Popover.Panel>
@@ -106,7 +97,7 @@ export default function Navbar() {
                     </Popover>
                 </div>
             </div>
-        </div>
+        </header>
     )
 }
 

@@ -93,14 +93,14 @@ export default function Herosection() {
                         key={item.name}
                         href={item.href}
                       >
-                        <h3 className="block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-red-900">{item.name}</h3>
+                        <h3 className="block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:text-red-600 cursor-pointer">{item.name}</h3>
                       </Link>
                     ))}
                   </div>
                   <Link
                     href="/kontakt"
                   >
-                    <h3 className="block w-full px-5 py-3 text-center font-medium text-red-600 bg-box-blue border-t border-red-600">Kontakt</h3>
+                    <h3 className="block w-full px-5 py-3 text-center font-medium text-red-600 bg-box-blue border-t border-red-600 cursor-pointer">Kontakt</h3>
                   </Link>
                 </div>
               </Popover.Panel>

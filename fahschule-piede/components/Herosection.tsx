@@ -34,7 +34,7 @@ export default function Herosection() {
                       <img
                         alt="Workflow"
                         className="h-8 w-auto sm:h-10 cursor-pointer"
-                        src="https://tailwindui.com/img/logos/workflow-mark.svg?color=red&shade=600"
+                        src="/assets/piede.png"
                       />
                     </Link>
                     <div className="-mr-2 flex items-center md:hidden">
@@ -76,7 +76,7 @@ export default function Herosection() {
                     <div>
                       <img
                         className="h-8 w-auto"
-                        src="https://tailwindui.com/img/logos/workflow-mark.svg?color=red&shade=600"
+                        src="/assets/piede.png"
                         alt=""
                       />
                     </div>
@@ -143,7 +143,7 @@ export default function Herosection() {
       <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 bg-slate-600">
         <img
           className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full mix-blend-overlay"
-          src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
+          src="/assets/Hero.jpg"
           alt=""
         />
       </div>

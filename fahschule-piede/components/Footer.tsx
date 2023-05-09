@@ -42,7 +42,7 @@ function Footer() {
                             <img
                         alt="Workflow"
                         className="h-8 w-auto sm:h-10"
-                        src="https://tailwindui.com/img/logos/workflow-mark.svg?color=red&shade=600"
+                        src="/assets/piede.png"
                       />
                         </h6>
                         <p>
@@ -57,13 +57,13 @@ function Footer() {
                             <Link href="/impressum" className="text-gray-100">Impressum</Link>
                         </p>
                         <p className="mb-4">
-                            <a href="#!" className="text-gray-100">Datenschutz</a>
+                            <Link href="/datenschutz" className="text-gray-100">Datenschutz</Link>
                         </p>
                         <p className="mb-4">
-                            <a href="#!" className="text-gray-100">Anmeldung</a>
+                            <Link href="/kontakt" className="text-gray-100">Anmeldung</Link>
                         </p>
                         <p>
-                            <a href="#!" className="text-gray-100">Ablauf</a>
+                            <Link href="/oeffnungszeiten" className="text-gray-100">Öffnungszeiten</Link>
                         </p>
                     </div>
                     <div className="">
@@ -77,7 +77,16 @@ function Footer() {
                                     d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z">
                                 </path>
                             </svg>
-                            Bahnhofstrasse 1 94209 Regen
+                            <a href="https://goo.gl/maps/ngGUefCyDJM2TR7u6" target="_blank" rel="noopener noreferrer">Bahnhofstraße 1 94209 Regen</a>
+                        </p>
+                        <p className="flex items-center justify-center md:justify-start mb-4">
+                            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="home"
+                                className="w-4 mr-4" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                <path fill="currentColor"
+                                    d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z">
+                                </path>
+                            </svg>
+                            <a href="https://goo.gl/maps/W6MD74UUsAn1Qe4J7" target="_blank" rel="noopener noreferrer">Zwieseler Straße 2 94264 Langdorf</a>
                         </p>
                         <p className="flex items-center justify-center md:justify-start mb-4">
                             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="envelope"
@@ -104,7 +113,7 @@ function Footer() {
             </div>
             <div className="text-center p-6 bg-back-blue">
                 <span>© 2022 Copyright: </span>
-                <a className="text-red-600 font-semibold" href="https://tailwind-elements.com/">Fahrschule Piede</a>
+                <a className="text-red-600 font-semibold" href="https://fahrschule-piede.de/">Fahrschule Piede</a>
             </div>
         </footer>
     )

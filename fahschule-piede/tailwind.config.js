@@ -10,6 +10,9 @@ module.exports = {
         'back-blue': '#0f172a',
         'box-blue': '#1e293b'
       },
+      backgroundImage: {
+        'class-pattern': "url('/assets/Klassen.gif')",
+      }
     },
   },
   plugins: [require('@tailwindcss/forms')],

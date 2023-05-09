@@ -23,7 +23,7 @@ export default function Navbar() {
                                             <img
                                                 alt="Workflow"
                                                 className="h-8 w-auto sm:h-10"
-                                                src="https://tailwindui.com/img/logos/workflow-mark.svg?color=red&shade=600"
+                                                src="/assets/piede.png"
                                             />
                                         </Link>
                                         <div className="-mr-2 flex items-center md:hidden">
@@ -65,7 +65,7 @@ export default function Navbar() {
                                         <div>
                                             <img
                                                 className="h-8 w-auto"
-                                                src="https://tailwindui.com/img/logos/workflow-mark.svg?color=red&shade=600"
+                                                src="/assets/piede.png"
                                                 alt=""
                                             />
                                         </div>

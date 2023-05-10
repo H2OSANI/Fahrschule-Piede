@@ -11,7 +11,7 @@ const Home: NextPage = () => {
 
           <div className='flex flex-col justify-around mb-5 md:mb-0 md:flex-row w-full md:max-w-6xl'>
             <div className='md:w-1/2 bg-slate-600 rounded-t-xl md:rounded-t-none md:rounded-tl-xl object-cover'>
-              <Image src="/assets/L1.jpg" layout='responsive' width="380px" height="280px" className='rounded-t-xl md:rounded-t-none md:rounded-tl-xl object-fit mix-blend-overlay' />
+              <Image src="/assets/L1.webp" layout='responsive' width="380px" height="280px" className='rounded-t-xl md:rounded-t-none md:rounded-tl-xl object-fit mix-blend-overlay' />
             </div>
             <div id='desc' className='md:w-1/2 bg-box-blue md:rounded-tr-xl flex items-center pt-8 px-6 flex-col'>
               <div className="mb-4">
@@ -41,17 +41,15 @@ const Home: NextPage = () => {
               <p className='m-6 text-gray-300'>
                 Jeder lernt anders! Egal, welches Deine bevorzugte Geschwindigkeit am Steuer oder in der Theorie ist: Bei uns bleibt garantiert niemand auf der Strecke! Unser flexibles Ausbildungskonzept orientiert sich deshalb ganz an Deinen individuellen Bedürfnissen.
                 Damit dabei der Spaß auch nicht zu kurz kommt, arbeiten wir mit innovativen Methoden. Und das alles zu einem fairen Preis.
-
               </p>
             </div>
             <div className='md:w-1/2 bg-slate-600 object-cover'>
-              <Image src="/assets/L2.jpg" layout='responsive' width="380px" height="280px" className=' object-fit mix-blend-overlay' />
+              <Image src="/assets/L2.webp" layout='responsive' width="380px" height="280px" className=' object-fit mix-blend-overlay' />
             </div>
           </div>
-
           <div className='flex flex-col justify-around mb-5 md:mb-0 md:flex-row w-full md:max-w-6xl'>
             <div className='md:w-1/2 bg-slate-600 md:rounded-bl-xl object-cover'>
-              <Image src="/assets/L3.jpg" layout='responsive' width="380px" height="280px" className='md:rounded-bl-xl object-fit mix-blend-overlay' />
+              <Image src="/assets/L3.webp" layout='responsive' width="380px" height="280px" className='md:rounded-bl-xl object-fit mix-blend-overlay' />
             </div>
             <div className='md:w-1/2 bg-box-blue flex items-center pt-8 px-6 flex-col rounded-b-xl md:rounded-b-none rounded-br-xl'>
               <div className="mb-4">
@@ -67,7 +65,6 @@ const Home: NextPage = () => {
               </p>
             </div>
           </div>
-
         </div>
         <h2 className='hidden  pt-8 pb-8 text-red-600 text-4xl font-bold text-center'>Fahrschulen in Regen und Langdorf</h2>
         <h2 className='hidden pt-8 pb-8 text-red-600 text-4xl font-bold text-center'>Fahrschulen in Regen</h2>
@@ -82,8 +79,6 @@ const Home: NextPage = () => {
         </div>
       </div>
     </>
-
   )
 }
-
 export default Home

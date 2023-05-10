@@ -112,7 +112,7 @@ function Footer() {
                 </div>
             </div>
             <div className="text-center p-6 bg-back-blue">
-                <span>© 2022 Copyright: </span>
+                <span>© {new Date().getFullYear()} Copyright: </span>
                 <a className="text-red-600 font-semibold" href="https://fahrschule-piede.de/">Fahrschule Piede</a>
             </div>
         </footer>

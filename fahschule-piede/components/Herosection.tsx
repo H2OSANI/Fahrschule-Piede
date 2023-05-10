@@ -8,13 +8,14 @@ const navigation = [
   { name: 'Start', href: '/' },
   { name: 'Führerscheine', href: '/fuehrerscheine' },
   { name: 'Öffnungszeiten', href: '/oeffnungszeiten' },
+  { name: 'US-Truck mieten', href: 'https://americantruck-events.de'},
 ]
 
 export default function Herosection() {
   return (
     <div className="block md:relative bg-back-blue overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="block md:relative z-10 pb-8 bg-back-blue sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
+        <div className="block md:relative z-10 pb-8 bg-back-blue sm:pb-16 md:pb-20 lg:max-w-3xl lg:w-full lg:pb-28 xl:pb-32">
           <svg
             className="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2"
             fill="currentColor"

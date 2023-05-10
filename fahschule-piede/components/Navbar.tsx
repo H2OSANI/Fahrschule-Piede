@@ -7,13 +7,14 @@ const navigation = [
     { name: 'Start', href: '/' },
     { name: 'Führerscheine', href: '/fuehrerscheine' },
     { name: 'Öffnungszeiten', href: '/oeffnungszeiten' },
+    { name: 'US-Truck mieten', href: 'https://americantruck-events.de'},
 ]
 
 export default function Navbar() {
     return (
         <header className="md:block bg-back-blue overflow-hidden">
             <div className="max-w-7xl mx-auto">
-                <div className="block md:block z-40 pb-8 bg-back-blue sm:pb-16 md:pb-2 lg:max-w-2xl lg:w-full lg:pb-2 xl:pb-2">
+                <div className="block md:block z-40 pb-8 bg-back-blue sm:pb-16 md:pb-2 lg:max-w-3xl lg:w-full lg:pb-2 xl:pb-2">
                     <Popover>
                         <div className="relative pt-6 px-4 sm:px-6 lg:px-8">
                             <nav className="relative flex items-center justify-between sm:h-10 lg:justify-start" aria-label="Global">
@@ -82,7 +83,7 @@ export default function Navbar() {
                                                 key={item.name}
                                                 href={item.href}
                                             >
-                                                <h3  className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-red-600 cursor-pointer">{item.name}</h3>
+                                                <h3 className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-red-600 cursor-pointer">{item.name}</h3>
                                             </Link>
                                         ))}
                                     </div>

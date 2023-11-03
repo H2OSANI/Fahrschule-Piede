@@ -1,6 +1,7 @@
-
+.DS_Store
 Assets/leon.png
 Assets/piede.pdf
 Assets/Visitenkarte.PNG
 fahschule-piede/.firebase/*
 fahschule-piede/.env
+fahschule-piede/node_modules

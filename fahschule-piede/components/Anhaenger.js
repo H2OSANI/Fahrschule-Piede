@@ -5,11 +5,16 @@ import { ChevronUpIcon } from "@heroicons/react/outline"
 function Anhaenger() {
     return (
         <>
-            <img src="/assets/Anhänger.svg" className="cursor-pointer w-44 h-22" />
+            <div className="flex justify-center w-full">
+                <div>
+                    <img src="/assets/Anhänger.svg" className="cursor-pointer w-20 h-16 object-contain self-center" />
+                </div>
+            </div>
             <Dialog.Title
                 as="h2"
                 className="text-lg font-medium leading-6 text-white my-6"
             >
+
                 KLASSE: BE, B96
             </Dialog.Title>
             <Disclosure defaultOpen={true} >

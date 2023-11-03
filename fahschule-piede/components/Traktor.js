@@ -5,7 +5,11 @@ import { ChevronUpIcon } from "@heroicons/react/outline"
 function Traktor() {
     return (
         <>
-            <img src="/assets/Traktor.svg" className="cursor-pointer w-44 h-22" />
+            <div className="flex justify-center w-full">
+                <div>
+                    <img src="/assets/Traktor.svg" className="cursor-pointer w-20 h-16 object-contain self-center" />
+                </div>
+            </div>
             <Dialog.Title
                 as="h2"
                 className="text-lg font-medium leading-6 text-white my-6"

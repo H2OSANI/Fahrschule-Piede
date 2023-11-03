@@ -1,7 +1,9 @@
 import Select from 'react-select'
-import React, { useRef } from "react"
+import React, { useRef, useEffect, useState } from "react"
 import emailjs from "@emailjs/browser"
 import toast, { Toaster } from 'react-hot-toast'
+import { db } from '../lib/firebase'
+import { collection, addDoc, doc } from 'firebase/firestore'
 
 const vorbesitz = [
     { value: 'AM', label: 'AM' },
@@ -36,22 +38,53 @@ const anmeldung = [
     { value: 'T', label: 'T' }
 ]
 function Form() {
-    const form = useRef<HTMLFormElement>(null);
-
-    const sendEmail = (e: any) => {
-        e.preventDefault();
-        emailjs.sendForm(`service_uzqd4wu`, `template_o20v3qf`, form.current!, `iEU-IFKLoxl79jqsm`)
-            .then((result) => {
-                console.log(result.text);
-                toast.success('Anmeldung versendet!')
-                form.current?.reset()
-            }, (error) => {
-                console.log(error.text);
-                toast.error('Überprüfe deine Angaben!')
-            });
-    };
+    const [selectedKlasse, setSelectedKlasse] = useState([])
+    const [selectedVorbesitz, setSelectedVorbesitz] = useState([])
+    const form = useRef(null);
+    const onChangeSelectionKlasse = (option, actionMeta) => {
+        setSelectedKlasse([]);
+        option.forEach((item) => {
+            setSelectedKlasse((selectedKlasse) => [...selectedKlasse, item.value]);
+        });
+      };  
+    const onChangeSelectionVorbesitz = (option, actionMeta) => {
+        setSelectedVorbesitz([]);
+        option.forEach((item) => {
+            setSelectedVorbesitz((selectedVorbesitz) => [...selectedVorbesitz, item.value]);
+        });
+     }
+    const uploadKontakt = async (event) => {
+        event.preventDefault();
+        const formData = new FormData(form.current);
+        let data = {isSchueler: false};
+        
+        formData.forEach((value, key) => {
+            console.log(selectedKlasse)
+            switch (key) {
+                case "Klasse":
+                    data[key] = selectedKlasse
+                    break;
+                case "Vorbesitz":
+                    data[key] = selectedVorbesitz
+                    break;
+            
+                default:
+                    data[key] = value;
+                    break;
+            }
+        });
+        console.log(data)        
+       const collectionRef = collection(db, "anmeldung");
+       addDoc(collectionRef, data).then((result) => {
+        toast.success('Anmeldung versendet!')
+        form.current?.reset()
+        }).catch((error) => {
+            console.log(error.text);
+            toast.error('Überprüfe deine Angaben!')
+        });
+    }
     return (
-        <form className="mb-0 space-y-6 bg-box-blue" ref={form} onSubmit={sendEmail}>
+        <form className="mb-0 space-y-6 bg-box-blue" ref={form} onSubmit={uploadKontakt}>
             <Toaster position='top-center' reverseOrder={false} />
             <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                 <div className="">
@@ -90,7 +123,6 @@ function Form() {
                         <input id="Geburtsort" name="Geburtsort" type="text" required className="" />
                     </div>
                 </div>
-
                 <div>
                     <label htmlFor="Adresse" className="block text-lg font-medium text-gray-100">Straße, Hausnummer</label>
                     <div className="mt-1">
@@ -124,14 +156,14 @@ function Form() {
 
                 <div className="">
                     <label htmlFor="Klasse" className="block text-lg font-medium text-gray-100" >Führerscheinklasse Anmeldung</label>
-                    <Select isMulti className="basic-multi-select"
-                        classNamePrefix="select" options={anmeldung} name="Klasse" aria-label='Multiselect Dropdown'/>
+                    <Select isMulti={true} className="basic-multi-select"
+                        classNamePrefix="select" options={anmeldung} onChange={onChangeSelectionKlasse} name="Klasse" aria-label='Multiselect Dropdown'/>
 
                 </div>
                 <div>
                     <label htmlFor="Vorbesitz" className="block text-lg font-medium text-gray-100" >Führerschein Vorbesitz</label>
                     <Select isMulti className="basic-multi-select"
-                        classNamePrefix="select" options={vorbesitz} name="Vorbesitz" aria-label='Multiselect Dropdown'/>
+                        classNamePrefix="select" options={vorbesitz} onChange={onChangeSelectionVorbesitz} name="Vorbesitz" aria-label='Multiselect Dropdown'/>
                 </div>
             </div>
             <div>

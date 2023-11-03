@@ -5,7 +5,7 @@ import { ChevronUpIcon } from "@heroicons/react/outline"
 function Zweirad() {
   return (
     <>
-    <Image src="/assets/Motorrad.svg" width="180px" height="80px" className="cursor-pointer" />
+    <Image src="/assets/Motorrad.svg" width="180px" height="80px" className="cursor-pointer w-44 h-20" />
     <Dialog.Title
         as="h2"
         className="text-lg font-medium leading-6 text-white my-6"

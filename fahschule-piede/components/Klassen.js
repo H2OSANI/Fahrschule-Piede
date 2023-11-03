@@ -37,7 +37,7 @@ function Klassen() {
                     openModal()
                     setPKW(true)
                     }}>
-                    <Image src="/assets/PKW.svg" width="48px" height="30px" className="cursor-pointer" />
+                    <Image src="/assets/PKW.svg" width={48} height={30} className="cursor-pointer" />
                     <h2 className="text-gray-300 text-lg font-bold text-center mt-2 cursor-pointer">PKW {"→"}</h2>
                 </div>
 
@@ -45,7 +45,7 @@ function Klassen() {
                     openModal()
                     setZweirad(true)
                     }}>
-                    <Image src="/assets/Motorrad.svg" width="48px" height="30px" className="cursor-pointer" />
+                    <Image src="/assets/Motorrad.svg" width={48} height={30} className="cursor-pointer" />
                     <h2 className="text-gray-300 text-lg font-bold text-center mt-2 cursor-pointer">Zweirad {"→"}</h2>
                 </div>
 
@@ -53,7 +53,7 @@ function Klassen() {
                     openModal()
                     setAnhaenger(true)
                     }}>
-                    <Image src="/assets/Anhänger.svg" width="48px" height="30px" className="cursor-pointer" />
+                    <Image src="/assets/Anhänger.svg" width={48} height={30} className="cursor-pointer" />
                     <h2 className="text-gray-300 text-lg font-bold text-center mt-2 cursor-pointer">Anhänger {"→"}</h2>
                 </div>
 
@@ -61,7 +61,7 @@ function Klassen() {
                     openModal()
                     setLKW(true)
                     }}>
-                    <Image src="/assets/LKW.svg" width="48px" height="30px" className="cursor-pointer" />
+                    <Image src="/assets/LKW.svg" width={48} height={30} className="cursor-pointer" />
                     <h2 className="text-gray-300 text-lg font-bold text-center mt-2 cursor-pointer">LKW {"→"}</h2>
                 </div>
 
@@ -69,7 +69,7 @@ function Klassen() {
                     openModal()
                     setTraktor(true)
                     }}>
-                    <Image src="/assets/Traktor.svg" width="48px" height="30px" className="cursor-pointer" />
+                    <Image src="/assets/Traktor.svg" width={48} height={30} className="cursor-pointer" />
                     <h2 className="text-gray-300 text-lg font-bold text-center mt-2 cursor-pointer">Traktor {"→"}</h2>
                 </div>
             </div>

@@ -1,8 +1,7 @@
-import type { NextPage } from 'next'
 import Image from 'next/image'
 import Herosection from '../components/Herosection'
 
-const Home: NextPage = () => {
+const Home = () => {
   return (
     <>
       <Herosection />

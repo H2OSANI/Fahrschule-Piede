@@ -5,7 +5,7 @@ import { ChevronUpIcon } from "@heroicons/react/outline"
 function Anhaenger() {
     return (
         <>
-            <Image src="/assets/Anhänger.svg" width="180px" height="80px" className="cursor-pointer w-44 h-20" />
+            <Image src="/assets/Anhänger.svg" width={180} height={80} className="cursor-pointer" />
             <Dialog.Title
                 as="h2"
                 className="text-lg font-medium leading-6 text-white my-6"

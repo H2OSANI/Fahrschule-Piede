@@ -1,11 +1,10 @@
 import { Dialog, Disclosure, Transition } from "@headlessui/react"
-import Image from "next/image"
 import { ChevronUpIcon } from "@heroicons/react/outline"
 
 function PKW() {
     return (
         <>
-            <Image src="/assets/PKW.svg" width={180} height={80} className="cursor-pointer" />
+            <img src="/assets/PKW.svg" className="cursor-pointer w-44 h-22" />
             <Dialog.Title
                 as="h2"
                 className="text-lg font-medium leading-6 text-white my-6"

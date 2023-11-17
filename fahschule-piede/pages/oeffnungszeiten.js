@@ -2,8 +2,11 @@
 import Navbar from "../components/Navbar"
 import { getDoc, doc } from "firebase/firestore"
 import { db } from "../lib/firebase"
+import { Suspense } from "react";
+import Loading from "./loading";
 
 const wochentage = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
+
 // Function to fetch data from Firestore
 async function getDataFromFirestore() {
     const querySnapshot = await getDoc(doc(db, 'settings', 'parameter'));
@@ -14,14 +17,16 @@ async function getDataFromFirestore() {
     return data;
 }
 function öffnungszeiten({ data }) {
-    
+
     const currentdayNumber = new Date().getDay();
     const isNow = wochentage[currentdayNumber];
     return (
         <>
             <Navbar />
+
             <main className="w-full min-h-screen bg-back-blue">
                 <h1 className="mb-2 md:mb-6 text-gray-100 font-bold text-3xl mx-auto text-center">Öffnungszeiten</h1>
+                <Suspense fallback={<Loading />}>
                 <div className="grid grid-cols-1 gap-4 max-w-3xl mx-auto">
                     <div className="bg-white space-y-4 p-4 rounded-lg shadow">
                         <div className="flex flex-col space-y-3 items-center space-x-2 text-md">
@@ -38,22 +43,22 @@ function öffnungszeiten({ data }) {
                                 </p>
                             </div>
                             {data.oeffnungszeiten.standort[0].unterrichtszeiten.map((item) => (
-                            <div className="flex space-x-4" key={item.id}>
-                                <div>
-                                    {isNow === item.tag ?     
-                                        <p className="font-bold">{item.tag}:</p>
-                                    :
-                                        <p>{item.tag}:</p>
-                                    }
+                                <div className="flex space-x-4" key={item.id}>
+                                    <div>
+                                        {isNow === item.tag ?
+                                            <p className="font-bold">{item.tag}:</p>
+                                            :
+                                            <p>{item.tag}:</p>
+                                        }
+                                    </div>
+                                    <div>
+                                        {isNow === item.tag ?
+                                            <p className="font-bold">{item.zeit}</p>
+                                            :
+                                            <p>{item.zeit}</p>
+                                        }
+                                    </div>
                                 </div>
-                                <div>
-                                {isNow === item.tag ?     
-                                        <p className="font-bold">{item.zeit}</p>
-                                    :
-                                        <p>{item.zeit}</p>
-                                    }
-                                </div>
-                            </div>
                             ))}
                             <div>Bürozeit: <span className="underline">{data.oeffnungszeiten.standort[0].buerozeit}</span></div>
                         </div>
@@ -73,37 +78,39 @@ function öffnungszeiten({ data }) {
                                 </p>
                             </div>
                             {data.oeffnungszeiten.standort[1].unterrichtszeiten.map((item) => (
-                            <div className="flex space-x-4" key={item.id}>
-                                <div>
-                                    {isNow === item.tag ?     
-                                        <p className="font-bold">{item.tag}:</p>
-                                    :
-                                        <p>{item.tag}:</p>
-                                    }
+                                <div className="flex space-x-4" key={item.id}>
+                                    <div>
+                                        {isNow === item.tag ?
+                                            <p className="font-bold">{item.tag}:</p>
+                                            :
+                                            <p>{item.tag}:</p>
+                                        }
+                                    </div>
+                                    <div>
+                                        {isNow === item.tag ?
+                                            <p className="font-bold">{item.zeit}</p>
+                                            :
+                                            <p>{item.zeit}</p>
+                                        }
+                                    </div>
                                 </div>
-                                <div>
-                                {isNow === item.tag ?     
-                                        <p className="font-bold">{item.zeit}</p>
-                                    :
-                                        <p>{item.zeit}</p>
-                                    }
-                                </div>
-                            </div>
                             ))}
                             <div>Bürozeit: <span className="underline">{data.oeffnungszeiten.standort[0].buerozeit}</span></div>
                         </div>
                     </div>
                 </div>
-            </main>
+                </Suspense>
+            </main >
         </>
     )
 }
-export async function getServerSideProps() {
+export async function getStaticProps() {
     const data = await getDataFromFirestore();
     return {
         props: {
             data,
         },
+        revalidate: 1800,
     };
 }
 

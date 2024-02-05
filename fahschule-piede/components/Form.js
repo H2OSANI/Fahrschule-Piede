@@ -3,7 +3,7 @@ import React, { useRef, useEffect, useState } from "react"
 import emailjs from "@emailjs/browser"
 import toast, { Toaster } from 'react-hot-toast'
 import { db } from '../lib/firebase'
-import { collection, addDoc, doc } from 'firebase/firestore'
+import { collection, doc, writeBatch } from 'firebase/firestore'
 
 const vorbesitz = [
     { value: 'AM', label: 'AM' },
@@ -46,18 +46,18 @@ function Form() {
         option.forEach((item) => {
             setSelectedKlasse((selectedKlasse) => [...selectedKlasse, item.value]);
         });
-      };  
+    };
     const onChangeSelectionVorbesitz = (option, actionMeta) => {
         setSelectedVorbesitz([]);
         option.forEach((item) => {
             setSelectedVorbesitz((selectedVorbesitz) => [...selectedVorbesitz, item.value]);
         });
-     }
+    }
     const uploadKontakt = async (event) => {
         event.preventDefault();
         const formData = new FormData(form.current);
-        let data = {isSchueler: false};
-        
+        let data = { isSchueler: false };
+
         formData.forEach((value, key) => {
             console.log(selectedKlasse)
             switch (key) {
@@ -67,21 +67,43 @@ function Form() {
                 case "Vorbesitz":
                     data[key] = selectedVorbesitz
                     break;
-            
+
                 default:
                     data[key] = value;
                     break;
             }
         });
-        console.log(data)        
-       const collectionRef = collection(db, "anmeldung");
-       addDoc(collectionRef, data).then((result) => {
-        toast.success('Anmeldung versendet!')
-        form.current?.reset()
-        }).catch((error) => {
-            console.log(error.text);
-            toast.error('Überprüfe deine Angaben!')
+        const batch = writeBatch(db);
+        batch.set(doc(collection(db, 'anmeldung')), data);
+        batch.set(doc(collection(db, 'mail')), {
+            to: "info@fahrschule-piede.de",
+            message: {
+                subject: "Neue Fahrschulanmeldung",
+                html: `<h1>Anmeldung von : ${data.Sex} ${data.Vorname} ${data.Name}</h1> <br />
+                ${data.body}<br />
+                Geburtsdatum: <i>${data.Geburtsdatum}</i><br />
+                Geburtsort: <i>${data.Geburtsort}</i><br />
+                Adresse: <i>${data.Adresse}</i><br />
+                PLZ: <i>${data.PLZ}</i><br />
+                Ort: <i>${data.Ort}</i><br />
+                Email: <i>${data.email}</i><br />
+                Mobil: <i>${data.mobil}</i><br />
+                Anmeldung für: <i>${data.Klasse}</i><br />
+                Vorbesitz: <i>${data.Vorbesitz}</i><br />
+                <br />
+                Verwaltung unter <a href="admin.fahrschule-piede.de">admin.fahrschule-piede.de</a>`,
+                ReplyTo: data.email,
+                bcc: "sandro.podhorodeski@cloudshot.de"
+            }
         });
+        try {
+            await batch.commit();
+            toast.success('Anmeldung versendet!')
+            form.current?.reset()
+        }
+        catch {
+            toast.error('Überprüfe deine Angaben!')
+        }
     }
     return (
         <form className="mb-0 space-y-6 bg-box-blue" ref={form} onSubmit={uploadKontakt}>
@@ -157,13 +179,13 @@ function Form() {
                 <div className="">
                     <label htmlFor="Klasse" className="block text-lg font-medium text-gray-100" >Führerscheinklasse Anmeldung</label>
                     <Select isMulti={true} className="basic-multi-select"
-                        classNamePrefix="select" options={anmeldung} onChange={onChangeSelectionKlasse} name="Klasse" aria-label='Multiselect Dropdown'/>
+                        classNamePrefix="select" options={anmeldung} onChange={onChangeSelectionKlasse} name="Klasse" aria-label='Multiselect Dropdown' />
 
                 </div>
                 <div>
                     <label htmlFor="Vorbesitz" className="block text-lg font-medium text-gray-100" >Führerschein Vorbesitz</label>
                     <Select isMulti className="basic-multi-select"
-                        classNamePrefix="select" options={vorbesitz} onChange={onChangeSelectionVorbesitz} name="Vorbesitz" aria-label='Multiselect Dropdown'/>
+                        classNamePrefix="select" options={vorbesitz} onChange={onChangeSelectionVorbesitz} name="Vorbesitz" aria-label='Multiselect Dropdown' />
                 </div>
             </div>
             <div>

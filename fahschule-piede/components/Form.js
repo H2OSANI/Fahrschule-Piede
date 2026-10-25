@@ -1,9 +1,7 @@
 import Select from 'react-select'
-import React, { useRef, useEffect, useState } from "react"
-import emailjs from "@emailjs/browser"
+import React, { useEffect, useRef, useState } from 'react'
+import Script from 'next/script'
 import toast, { Toaster } from 'react-hot-toast'
-import { db } from '../lib/firebase'
-import { collection, doc, writeBatch } from 'firebase/firestore'
 
 const vorbesitz = [
     { value: 'AM', label: 'AM' },
@@ -37,80 +35,115 @@ const anmeldung = [
     { value: 'L', label: 'L' },
     { value: 'T', label: 'T' }
 ]
+
 function Form() {
     const [selectedKlasse, setSelectedKlasse] = useState([])
     const [selectedVorbesitz, setSelectedVorbesitz] = useState([])
-    const form = useRef(null);
-    const onChangeSelectionKlasse = (option, actionMeta) => {
-        setSelectedKlasse([]);
-        option.forEach((item) => {
-            setSelectedKlasse((selectedKlasse) => [...selectedKlasse, item.value]);
-        });
-    };
-    const onChangeSelectionVorbesitz = (option, actionMeta) => {
-        setSelectedVorbesitz([]);
-        option.forEach((item) => {
-            setSelectedVorbesitz((selectedVorbesitz) => [...selectedVorbesitz, item.value]);
-        });
+    const [turnstileToken, setTurnstileToken] = useState('')
+    const [submitting, setSubmitting] = useState(false)
+    const form = useRef(null)
+    const turnstileWidgetId = useRef(null)
+    const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ''
+
+    const onChangeSelectionKlasse = (option) => {
+        setSelectedKlasse((option || []).map((item) => item.value))
     }
+    const onChangeSelectionVorbesitz = (option) => {
+        setSelectedVorbesitz((option || []).map((item) => item.value))
+    }
+
+    const resetTurnstile = () => {
+        setTurnstileToken('')
+        if (typeof window !== 'undefined' && window.turnstile && turnstileWidgetId.current != null) {
+            window.turnstile.reset(turnstileWidgetId.current)
+        }
+    }
+
+    const renderTurnstile = () => {
+        if (!siteKey || typeof window === 'undefined' || !window.turnstile) return
+        const container = document.getElementById('turnstile-widget')
+        if (!container || turnstileWidgetId.current != null) return
+        turnstileWidgetId.current = window.turnstile.render(container, {
+            sitekey: siteKey,
+            callback: (token) => setTurnstileToken(token),
+            'expired-callback': () => setTurnstileToken(''),
+            'error-callback': () => setTurnstileToken(''),
+        })
+    }
+
+    useEffect(() => {
+        renderTurnstile()
+    }, [siteKey])
+
     const uploadKontakt = async (event) => {
-        event.preventDefault();
-        const formData = new FormData(form.current);
-        let data = { isSchueler: false };
+        event.preventDefault()
+        if (submitting) return
 
-        formData.forEach((value, key) => {
-            console.log(selectedKlasse)
-            switch (key) {
-                case "Klasse":
-                    data[key] = selectedKlasse
-                    break;
-                case "Vorbesitz":
-                    data[key] = selectedVorbesitz
-                    break;
+        if (!siteKey) {
+            toast.error('Bot-Schutz ist nicht konfiguriert.')
+            return
+        }
+        if (!turnstileToken) {
+            toast.error('Bitte die Bot-Prüfung abschließen.')
+            return
+        }
 
-                default:
-                    data[key] = value;
-                    break;
-            }
-        });
-        const batch = writeBatch(db);
-        batch.set(doc(collection(db, 'anmeldung')), data);
-        batch.set(doc(collection(db, 'mail')), {
-            to: "info@fahrschule-piede.de",
-            message: {
-                subject: "Neue Fahrschulanmeldung",
-                html: `<h1>Anmeldung von : ${data.Sex} ${data.Vorname} ${data.Name}</h1> <br />
-                ${data.body}<br />
-                Geburtsdatum: <i>${data.Geburtsdatum}</i><br />
-                Geburtsort: <i>${data.Geburtsort}</i><br />
-                Adresse: <i>${data.Adresse}</i><br />
-                PLZ: <i>${data.PLZ}</i><br />
-                Ort: <i>${data.Ort}</i><br />
-                Email: <i>${data.email}</i><br />
-                Mobil: <i>${data.mobil}</i><br />
-                Anmeldung für: <i>${data.Klasse}</i><br />
-                Vorbesitz: <i>${data.Vorbesitz}</i><br />
-                <br />
-                Verwaltung unter <a href="admin.fahrschule-piede.de">admin.fahrschule-piede.de</a>`,
-                ReplyTo: data.email,
-                bcc: "sandro.podhorodeski@cloudshot.de"
-            }
-        });
+        const formData = new FormData(form.current)
+        const payload = {
+            Sex: formData.get('Sex') || '',
+            Vorname: formData.get('Vorname') || '',
+            Name: formData.get('Name') || '',
+            Geburtsdatum: formData.get('Geburtsdatum') || '',
+            Geburtsort: formData.get('Geburtsort') || '',
+            Adresse: formData.get('Adresse') || '',
+            PLZ: formData.get('PLZ') || '',
+            Ort: formData.get('Ort') || '',
+            email: formData.get('email') || '',
+            mobil: formData.get('mobil') || '',
+            body: formData.get('body') || '',
+            website: formData.get('website') || '',
+            Klasse: selectedKlasse,
+            Vorbesitz: selectedVorbesitz,
+            turnstileToken,
+        }
+
+        setSubmitting(true)
         try {
-            await batch.commit();
+            const response = await fetch('/api/anmeldung', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            })
+            const result = await response.json().catch(() => ({}))
+            if (!response.ok) {
+                toast.error(result.error || 'Überprüfe deine Angaben!')
+                resetTurnstile()
+                return
+            }
             toast.success('Anmeldung versendet!')
             form.current?.reset()
-        }
-        catch {
+            setSelectedKlasse([])
+            setSelectedVorbesitz([])
+            resetTurnstile()
+        } catch {
             toast.error('Überprüfe deine Angaben!')
+            resetTurnstile()
+        } finally {
+            setSubmitting(false)
         }
     }
+
     return (
         <form className="mb-0 space-y-6 bg-box-blue" ref={form} onSubmit={uploadKontakt}>
-            <Toaster position='top-center' reverseOrder={false} />
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+            <Toaster position="top-center" reverseOrder={false} />
+            <Script
+                src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+                strategy="afterInteractive"
+                onLoad={renderTurnstile}
+            />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="">
-                    <label htmlFor="anrede" className="block text-lg font-medium text-gray-100" >Anrede</label>
+                    <label htmlFor="anrede" className="block text-lg font-medium text-gray-100">Anrede</label>
                     <select name="Sex" id="anrede" className="" autoComplete="sex">
                         <option value="">Bitte auswählen</option>
                         <option value="Herr">Herr</option>
@@ -177,15 +210,30 @@ function Form() {
                 </div>
 
                 <div className="">
-                    <label htmlFor="Klasse" className="block text-lg font-medium text-gray-100" >Führerscheinklasse Anmeldung</label>
-                    <Select isMulti={true} className="basic-multi-select"
-                        classNamePrefix="select" options={anmeldung} onChange={onChangeSelectionKlasse} name="Klasse" aria-label='Multiselect Dropdown' />
-
+                    <label htmlFor="Klasse" className="block text-lg font-medium text-gray-100">Führerscheinklasse Anmeldung</label>
+                    <Select
+                        isMulti={true}
+                        className="basic-multi-select"
+                        classNamePrefix="select"
+                        options={anmeldung}
+                        onChange={onChangeSelectionKlasse}
+                        name="Klasse"
+                        aria-label="Multiselect Dropdown"
+                        value={anmeldung.filter((o) => selectedKlasse.includes(o.value))}
+                    />
                 </div>
                 <div>
-                    <label htmlFor="Vorbesitz" className="block text-lg font-medium text-gray-100" >Führerschein Vorbesitz</label>
-                    <Select isMulti className="basic-multi-select"
-                        classNamePrefix="select" options={vorbesitz} onChange={onChangeSelectionVorbesitz} name="Vorbesitz" aria-label='Multiselect Dropdown' />
+                    <label htmlFor="Vorbesitz" className="block text-lg font-medium text-gray-100">Führerschein Vorbesitz</label>
+                    <Select
+                        isMulti
+                        className="basic-multi-select"
+                        classNamePrefix="select"
+                        options={vorbesitz}
+                        onChange={onChangeSelectionVorbesitz}
+                        name="Vorbesitz"
+                        aria-label="Multiselect Dropdown"
+                        value={vorbesitz.filter((o) => selectedVorbesitz.includes(o.value))}
+                    />
                 </div>
             </div>
             <div>
@@ -195,11 +243,36 @@ function Form() {
                 </div>
             </div>
 
+            {/* Honeypot — leave empty. Hidden from real users. */}
+            <div
+                aria-hidden="true"
+                style={{
+                    position: 'absolute',
+                    left: '-10000px',
+                    top: 'auto',
+                    width: '1px',
+                    height: '1px',
+                    overflow: 'hidden',
+                }}
+            >
+                <label htmlFor="website">Website</label>
+                <input
+                    id="website"
+                    name="website"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                />
+            </div>
+
+            <div id="turnstile-widget" className="flex justify-center" />
+
             <div>
                 <input
                     type="submit"
-                    value="Absenden"
-                    className="cursor-pointer w-full flex justify-center py-2 px-4 border border-transparent rounded-2xl text-xl shadow-sm text-gray-100 font-medium text-brand-white bg-red-600 hover:bg-red-400 hover:rounded-lg transition-all duration-300  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-700"
+                    value={submitting ? 'Wird gesendet…' : 'Absenden'}
+                    disabled={submitting}
+                    className="cursor-pointer w-full flex justify-center py-2 px-4 border border-transparent rounded-2xl text-xl shadow-sm text-gray-100 font-medium text-brand-white bg-red-600 hover:bg-red-400 hover:rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-700 disabled:opacity-60 disabled:cursor-not-allowed"
                 />
             </div>
         </form>

@@ -1,27 +1,40 @@
-# Next.js + Tailwind CSS Example
+# Fahrschule Piede Website
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+Next.js site for Fahrschule Piede (Firebase Hosting).
 
-## Deploy your own
+## Anmeldung form protection
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+The `/kontakt` signup form posts to `/api/anmeldung`, which:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+1. Rejects honeypot submissions
+2. Rate-limits by IP
+3. Verifies [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/)
+4. Validates and HTML-escapes fields
+5. Writes to Firestore (`anmeldung` + `mail`) via the Admin SDK
 
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-```
+Client writes to `anmeldung` / `mail` are denied in `firestore.rules`. Deploy rules after merge:
 
 ```bash
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
+firebase deploy --only firestore:rules
 ```
+
+### Environment variables
+
+Copy `.env.example` and set:
+
+| Variable | Where |
+|---|---|
+| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | Client (Turnstile widget) |
+| `TURNSTILE_SECRET_KEY` | Server (siteverify) |
+| `FIREBASE_SERVICE_ACCOUNT` | Optional JSON for local API testing |
+| `FIREBASE_PROJECT_ID` | Optional; defaults to `fahrschule-piede` |
+
+Create a Turnstile widget in the [Cloudflare dashboard](https://dash.cloudflare.com/?to=/:account/turnstile) for your production domain and `localhost`.
+
+## Scripts
 
 ```bash
-pnpm create next-app --example with-tailwindcss with-tailwindcss-app
+npm install
+npm run dev
+npm run build
 ```
-
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).

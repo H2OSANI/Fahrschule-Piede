@@ -79,6 +79,10 @@ function Form() {
         event.preventDefault()
         if (submitting) return
 
+        if (selectedKlasse.length === 0) {
+            toast.error('Bitte mindestens eine Führerscheinklasse auswählen.')
+            return
+        }
         if (!siteKey) {
             toast.error('Bot-Schutz ist nicht konfiguriert.')
             return

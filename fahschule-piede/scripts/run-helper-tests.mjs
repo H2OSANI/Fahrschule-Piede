@@ -24,6 +24,7 @@ const {
   validateAnmeldungPayload,
   buildMailHtml,
   isRateLimited,
+  spamScore,
 } = await import(pathToFileURL(outfile).href)
 
 function assert(cond, msg) {
@@ -60,6 +61,111 @@ try {
     assert(!isRateLimited(ip), `request ${i + 1} should be allowed`)
   }
   assert(isRateLimited(ip), '6th request should be rate limited')
+
+  const pastedSpam = {
+    Sex: 'Herr',
+    Vorname: 'Hhmjqt',
+    Name: 'FwTOGEkzaSITcMRFhjJL',
+    Geburtsdatum: '1970-05-31',
+    Geburtsort: 'wzHjeaZhjaASPqEKSXAYtSK',
+    Adresse: 'wouRcXBlVhqifPhoJsMG',
+    PLZ: '34348',
+    Ort: 'cLLdrgrCSewGVMIvhfZ',
+    email: 'ca.kanif.999@gmail.com',
+    mobil: '6344132830',
+    body: 'qCQXbXZbAvhrfWetRFC',
+    Klasse: ['B'],
+    Vorbesitz: [],
+  }
+  const spam = validateAnmeldungPayload(pastedSpam)
+  assert(!spam.ok && spam.error === 'Bitte prüfe deine Angaben.', 'pasted spam should be rejected')
+  assert(spamScore(pastedSpam) >= 4, 'pasted spam score should reach the limit')
+
+  const missingKlasse = validateAnmeldungPayload({
+    ...pastedSpam,
+    Name: 'Mustermann',
+    Geburtsdatum: '2000-01-01',
+    Geburtsort: 'Regen',
+    Adresse: 'Bahnhofstraße 1',
+    PLZ: '94209',
+    Ort: 'Regen',
+    email: 'max@example.com',
+    mobil: '015120100912',
+    body: '',
+    Klasse: [],
+  })
+  assert(
+    !missingKlasse.ok && missingKlasse.error === 'Bitte mindestens eine Führerscheinklasse auswählen.',
+    'signup without a licence class should be rejected'
+  )
+
+  const legitimate = [
+    {
+      Sex: 'Frau',
+      Vorname: 'Harmanpreet',
+      Name: 'Kaur',
+      Geburtsdatum: '2006-09-26',
+      Geburtsort: 'Indien',
+      Adresse: 'Felsenweg 3',
+      PLZ: '94209',
+      Ort: 'Regen',
+      email: 'harmanpreet.kaur2609@icloud.com',
+      mobil: '0155 60075692',
+      body: '',
+      Klasse: ['B'],
+      Vorbesitz: [],
+    },
+    {
+      Sex: 'Frau',
+      Vorname: 'Катерина',
+      Name: 'Баранченко',
+      Geburtsdatum: '1984-01-23',
+      Geburtsort: 'Україна',
+      Adresse: 'Bodenmaiser Straße 4',
+      PLZ: '94264',
+      Ort: 'Langdorf',
+      email: 'katy230184@gmail.com',
+      mobil: '+4915115826866',
+      body: '',
+      Klasse: ['B'],
+      Vorbesitz: [],
+    },
+    {
+      Sex: 'Herr',
+      Vorname: 'Robert Leslie',
+      Name: 'Kustos Ward',
+      Geburtsdatum: '1963-10-20',
+      Geburtsort: 'Tyler, Texas USA',
+      Adresse: 'Dürlau 1',
+      PLZ: '94269',
+      Ort: 'Rinchnach',
+      email: 'r.kustosward@yahoo.com',
+      mobil: '49015737565312',
+      body: 'I need to replace my Florida license. Ich spreche nur ein bisschen Deutsch.',
+      Klasse: ['B'],
+      Vorbesitz: ['B'],
+    },
+    {
+      Sex: 'Herr',
+      Vorname: 'Max',
+      Name: 'Mustermann',
+      Geburtsdatum: '1970-05-31',
+      Geburtsort: 'Regen',
+      Adresse: 'Bahnhofstraße 1',
+      PLZ: '85296',
+      Ort: 'Rohrbach',
+      email: 'max@example.com',
+      mobil: '015120100912',
+      body: '',
+      Klasse: ['B'],
+      Vorbesitz: [],
+    },
+  ]
+  for (const payload of legitimate) {
+    const result = validateAnmeldungPayload(payload)
+    assert(result.ok, `legitimate signup should pass: ${payload.Vorname} ${payload.Name}`)
+    assert(spamScore(payload) < 4, `legitimate score should stay under the limit: ${payload.Vorname}`)
+  }
 
   console.log('OK: anmeldung helpers passed')
 } finally {

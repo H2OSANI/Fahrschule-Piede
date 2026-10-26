@@ -56,6 +56,47 @@ function asStringArray(value) {
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const PLZ_RE = /^\d{5}$/
+const SPAM_SCORE_LIMIT = 4
+const SPAM_BIRTH_DATE = '1970-05-31'
+
+function isGibberishToken(value) {
+  const text = String(value ?? '').trim()
+  if (/\s/.test(text)) return false
+  const letters = text.replace(/[^A-Za-zÄÖÜäöüß]/g, '')
+  if (letters.length < 12) return false
+  let changes = 0
+  for (let i = 1; i < letters.length; i++) {
+    const previous = letters[i - 1]
+    const current = letters[i]
+    const previousUpper = previous !== previous.toLowerCase() && previous === previous.toUpperCase()
+    const currentUpper = current !== current.toLowerCase() && current === current.toUpperCase()
+    if (previousUpper !== currentUpper) changes += 1
+  }
+  return changes >= 4
+}
+
+function gmailHasManyDots(email) {
+  const at = email.lastIndexOf('@')
+  if (at < 0) return false
+  if (email.slice(at + 1).toLowerCase() !== 'gmail.com') return false
+  return (email.slice(0, at).match(/\./g) || []).length >= 3
+}
+
+function isBareTenDigitPhone(mobil) {
+  const digits = String(mobil).replace(/\D/g, '')
+  return digits.length === 10 && !digits.startsWith('0')
+}
+
+export function spamScore(data) {
+  const gibberishCount = [data.Name, data.Adresse, data.Ort, data.Geburtsort, data.body]
+    .filter(isGibberishToken).length
+  let score = 0
+  if (gibberishCount >= 2) score += 2
+  if (gmailHasManyDots(data.email || '')) score += 2
+  if (isBareTenDigitPhone(data.mobil || '')) score += 1
+  if (data.Geburtsdatum === SPAM_BIRTH_DATE && score > 0) score += 2
+  return score
+}
 
 /**
  * @returns {{ ok: true, data: object } | { ok: false, error: string }}
@@ -92,26 +133,30 @@ export function validateAnmeldungPayload(body) {
   if (!PLZ_RE.test(PLZ)) {
     return { ok: false, error: 'Ungültige PLZ.' }
   }
-
-  return {
-    ok: true,
-    data: {
-      isSchueler: false,
-      Sex,
-      Vorname,
-      Name,
-      Geburtsdatum,
-      Geburtsort,
-      Adresse,
-      PLZ,
-      Ort,
-      email,
-      mobil,
-      body: bodyText,
-      Klasse,
-      Vorbesitz,
-    },
+  if (Klasse.length === 0) {
+    return { ok: false, error: 'Bitte mindestens eine Führerscheinklasse auswählen.' }
   }
+
+  const data = {
+    isSchueler: false,
+    Sex,
+    Vorname,
+    Name,
+    Geburtsdatum,
+    Geburtsort,
+    Adresse,
+    PLZ,
+    Ort,
+    email,
+    mobil,
+    body: bodyText,
+    Klasse,
+    Vorbesitz,
+  }
+  if (spamScore(data) >= SPAM_SCORE_LIMIT) {
+    return { ok: false, error: 'Bitte prüfe deine Angaben.' }
+  }
+  return { ok: true, data }
 }
 
 export function buildMailHtml(data) {

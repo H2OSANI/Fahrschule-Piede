@@ -45,7 +45,7 @@ export default async function handler(req, res) {
 
     batch.set(anmeldungRef, data)
     batch.set(mailRef, {
-      to: 'info@fahrschule-piede.de',
+      to: process.env.ANMELDUNG_MAIL_TO || 'info@fahrschule-piede.de',
       message: {
         subject: 'Neue Fahrschulanmeldung',
         html: buildMailHtml(data),
